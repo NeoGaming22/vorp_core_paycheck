@@ -9,10 +9,10 @@ local g = {}
 ------------------------------------------------------------------------
 -- Config Zone (obviously, now you can touch :))
 ------------------------------------------------------------------------
-local canServerConsoleDebugs = true
+local canServerConsoleDebugs = false
 -- Let this false to remove console prints!
 local salaryMessages = {
-    ["Money_Salary_Recive"] = "Money: You Recived a Money Salary: $",
+    ["Money_Salary_Recive"] = "You recieved paycheck a from the State: $",
     ["Gold_Salary_Recive"] = "Gold:You Recived a Gold Salary: ",
     ["Xp_Salary_Recive"] = "XP:+"
 }
@@ -31,7 +31,9 @@ local messageSecondsInScreen = 20 -- 20 by default
 -- just follow the examples 
 -- don't forgot the [,] in final of }
 ------------------------------------------------------------------------------------------
-g.salaryJobs = {{"police", 19, 0, 100}, {"example_job2", 19, 0, 0}}
+g.salaryJobs = {{"police", 20, 0, 0}, {"medic", 20, 0, 0},  {"banker", 20, 0, 0}, {"sheriff", 30, 0, 0}
+
+}
 
 function g:giveSalary(_verifyAntiAbuse)
     if _verifyAntiAbuse == "0x089027928098908" then
@@ -97,8 +99,7 @@ function g:giveSalary(_verifyAntiAbuse)
 						salaryMessages["Gold_Salary_Recive"] .. gold[source]
 				end
 				mensagens_U.finalMessage =
-					mensagens_U.money .. "\n" .. mensagens_U.gold .. "\n" ..
-						mensagens_U.xp
+					mensagens_U.money .. "\n" 
 				if isSalary then
 					g:Notify(mensagens_U.finalMessage)
 				end
@@ -117,7 +118,7 @@ end
 
 function g:Notify(msg)
     local source = source
-    TriggerClientEvent("vorp:Tip", source, msg, messageSecondsInScreen * 1000)
+    TriggerClientEvent("vorp:TipBottom", source, msg, messageSecondsInScreen * 1000)
 end
 ------------------------------------------------------------------------------------------
 
